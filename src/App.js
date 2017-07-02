@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Scroll from './components/Scroll/Scroll.js';
+import Main from './components/Main/Main.js';
+import ApiUtils from './helpers/helpers.js'
+
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      favorites: [],
+      scroll:{
+        text: 'text',
+        movieTitle: 'title',
+        releaseDate: 'year'
+      }
+    }
+  }
+
+componentDidMount(){
+  const apiUtils = new ApiUtils();
+  const films = apiUtils.fetchApiData('films')
+}
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+    <div>
+      <Scroll scroll={this.state.scroll} />
+      <Main favorites={this.state.favorites} />
+    </div>
     );
   }
 }

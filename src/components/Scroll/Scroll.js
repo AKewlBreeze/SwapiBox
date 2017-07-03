@@ -3,10 +3,10 @@ import './Scroll.css';
 
 const Scroll = ({ scrollFilm }) => {
   return (
-    <div>
-      {scrollFilm.opening_crawl}
-      {scrollFilm.title}
-      {scrollFilm.release_date}
+    <div className='scroll-container'>
+      <p className='scroll-crawl'>{scrollFilm.opening_crawl}</p>
+      <p className='scroll-title'>{scrollFilm.title}</p>
+      <p className='scroll-release-date'>{scrollFilm.release_date}</p>
     </div>
   );
 };

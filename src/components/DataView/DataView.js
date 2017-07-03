@@ -1,15 +1,13 @@
 import React from 'react';
 import './DataView.css';
-import Card from '../Card/Card.js'
+import Card from '../Card/Card';
 
-
-
-const DataView = ()=>{
-  return(
-    <div>
+const DataView = () => {
+  return (
+    <div className='card-container'>
       <Card />
     </div>
-  )
-}
+  );
+};
 
 export default DataView;

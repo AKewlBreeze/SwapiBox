@@ -10,12 +10,13 @@ class App extends Component {
     this.state = {
       favorites: [],
       scrollFilm: {},
+      isDevMode: true,
     };
   }
 
   componentDidMount() {
     const apiUtils = new ApiUtils();
-    const films = apiUtils.fetchApiData('films');
+    const films = apiUtils.fetchApiData('films', this.state.isDevMode);
     const randomFilm = films.results[this.getRandomInt(0, films.results.length + 1)];
     this.setState({ scrollFilm: randomFilm });
   }

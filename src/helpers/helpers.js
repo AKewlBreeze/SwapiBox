@@ -2,11 +2,21 @@ import filmsData from '../test/data/films';
 
 export default class ApiUtils {
 
-  fetchApiData(requestType) {
+  fetchApiData(requestType, devFlag) {
     let returnData;
     switch (requestType) {
       case 'films':
-        returnData = filmsData;
+        if (devFlag) {
+          returnData = filmsData;
+        } else {
+          // TODO Make films API call here
+        }
+        break;
+      case 'people':
+        break;
+      case 'planets':
+        break;
+      case 'vehicles':
         break;
       default:
         break;

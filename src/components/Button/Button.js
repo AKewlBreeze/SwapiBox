@@ -1,12 +1,12 @@
 import React from 'react';
-import './Button.css';
+import './Button.css'
 
-const Button = () => {
-  return (
-    <div className='btn-dataview'>
+const Button = ()=>{
+  return(
+    <div>
       <button> Button </button>
     </div>
-  );
-};
+  )
+}
 
 export default Button;

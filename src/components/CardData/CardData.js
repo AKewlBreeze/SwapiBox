@@ -1,12 +1,12 @@
-import React from 'react';
-import './CardData.css';
+import React from 'react'
+import './CardData.css'
 
-const CardData = () => {
-  return (
-    <div className='card-data'>
+const CardData = ()=>{
+  return(
+    <div>
       CardData
     </div>
-  );
-};
+  )
+}
 
 export default CardData;

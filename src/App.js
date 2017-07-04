@@ -3,6 +3,7 @@ import './App.css';
 import Scroll from './components/Scroll/Scroll';
 import Main from './components/Main/Main';
 import ApiUtils from './helpers/helpers';
+import filmsData from './test/data/films.js';
 
 class App extends Component {
   constructor() {

@@ -10,15 +10,19 @@ class App extends Component {
     this.state = {
       favorites: [],
       scrollFilm: {},
-      isDevMode: true,
+      isDevMode: false,
     };
   }
 
   componentDidMount() {
     const apiUtils = new ApiUtils();
-    const films = apiUtils.fetchApiData('films', this.state.isDevMode);
-    const randomFilm = films.results[this.getRandomInt(0, films.results.length)];
-    this.setState({ scrollFilm: randomFilm });
+    // const films = apiUtils.fetchApiData('films', this.state.isDevMode);
+    // const randomFilm = films.results[this.getRandomInt(0, films.results.length)];
+    // this.setState({ scrollFilm: randomFilm });
+    apiUtils.fetchApiData('films', this.state.isDevMode).then((films)=>{
+      const randomFilm = films.results[this.getRandomInt(0, films.results.length)];
+      this.setState({ scrollFilm: randomFilm });
+     });
   }
 
   getRandomInt(min, max) {

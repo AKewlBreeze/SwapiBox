@@ -2,14 +2,18 @@ import filmsData from '../test/data/films';
 
 export default class ApiUtils {
 
+
   fetchApiData(requestType, devFlag) {
+
     let returnData;
     switch (requestType) {
       case 'films':
         if (devFlag) {
           returnData = filmsData;
         } else {
-          // TODO Make films API call here
+          return fetch(`http://swapi.co/api/${requestType}/`).then((response)=>{
+            returnData = response.json()
+          })
         }
         break;
       case 'people':

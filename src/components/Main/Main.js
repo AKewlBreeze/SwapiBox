@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import DataView from '../DataView/DataView';
 import './Main.css';
 
-const Main = ({ favorites }) => {
+const Main = ({ favorites, currentData, handleClick }) => {
   return (
     <div className='main-container'>
       <div className='title'>
@@ -12,11 +12,11 @@ const Main = ({ favorites }) => {
         <FavButton favorites={favorites}/>
       </div>
       <div className='buttons-container'>
-        <Button />
-        <Button />
-        <Button />
+        <Button type='people' handleClick={handleClick} />
+        <Button type='planets' handleClick={handleClick} />
+        <Button type='vehicles' handleClick={handleClick} />
       </div>
-      <DataView />
+      <DataView currentData={currentData}/>
     </div>
   );
 };

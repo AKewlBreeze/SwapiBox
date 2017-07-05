@@ -11,14 +11,28 @@ class App extends Component {
       favorites: [],
       scrollFilm: {},
       isDevMode: false,
+      currentData: []
     };
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(requestType){
+    console.log('click', requestType);
+    const apiUtils = new ApiUtils();
+    const dataArray = apiUtils.getFromLocalStorage(requestType);
+    if(dataArray.length === 0){
+      apiUtils.fetchApiData(requestType, this.state.isDevMode).then(data =>{
+        apiUtils.saveToLocalStorage(requestType, data)
+        this.setState({currentData: data})
+      })
+    }
   }
 
   componentDidMount() {
     const apiUtils = new ApiUtils();
     const filmsArray = apiUtils.getFromLocalStorage('films');
     if (filmsArray.length === 0) {
-      apiUtils.fetchApiData('films', this.state.isDevMode).then((films) => {
+      apiUtils.fetchApiData('films', this.state.isDevMode).then(films => {
         apiUtils.saveToLocalStorage('films', films);
         this.setState({ scrollFilm: this.getRandomFilm(films) });
       });
@@ -41,7 +55,7 @@ class App extends Component {
     return (
     <div className='app-container'>
       <Scroll scrollFilm={this.state.scrollFilm} />
-      <Main favorites={this.state.favorites} />
+      <Main favorites={this.state.favorites} currentData={this.state.currentData} handleClick={this.handleClick} />
     </div>
     );
   }

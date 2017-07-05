@@ -16,10 +16,19 @@ export default class ApiUtils {
         }
         break;
       case 'people':
+      return fetch(`http://swapi.co/api/${requestType}/`).then((response) => {
+        return response.json();
+      });
         break;
       case 'planets':
+      return fetch(`http://swapi.co/api/${requestType}/`).then((response) => {
+        return response.json();
+      });
         break;
       case 'vehicles':
+      return fetch(`http://swapi.co/api/${requestType}/`).then((response) => {
+        return response.json();
+      });
         break;
       default:
         break;

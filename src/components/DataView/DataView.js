@@ -2,7 +2,8 @@ import React from 'react';
 import './DataView.css';
 import Card from '../Card/Card';
 
-const DataView = () => {
+const DataView = ({ currentData }) => {
+  console.log(currentData);
   return (
     <div className='card-container'>
       <Card />

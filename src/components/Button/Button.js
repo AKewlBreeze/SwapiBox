@@ -1,10 +1,10 @@
 import React from 'react';
 import './Button.css';
 
-const Button = () => {
+const Button = ({type, handleClick}) => {
   return (
     <div className='btn-dataview'>
-      <button> Button </button>
+      <button onClick={()=> handleClick(type)}> Button </button>
     </div>
   );
 };

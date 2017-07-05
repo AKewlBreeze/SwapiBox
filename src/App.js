@@ -17,9 +17,10 @@ class App extends Component {
 
   componentDidMount() {
     const apiUtils = new ApiUtils();
-    const films = apiUtils.fetchApiData('films', this.state.isDevMode);
-    const randomFilm = films.results[this.getRandomInt(0, films.results.length)];
-    this.setState({ scrollFilm: randomFilm });
+    apiUtils.fetchApiData('films', this.state.isDevMode).then((films)=>{
+      const randomFilm = films.results[this.getRandomInt(0, films.results.length)];
+      this.setState({ scrollFilm: randomFilm });
+    });
   }
 
   getRandomInt(min, max) {
@@ -31,7 +32,7 @@ class App extends Component {
   render() {
     return (
     <div className='app-container'>
-      <Scroll scrollFilm={this.state.scrollFilm} />
+      <Scroll scrollFilm={this.state.scrollFilm}/>
       <Main favorites={this.state.favorites} />
     </div>
     );

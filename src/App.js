@@ -16,13 +16,19 @@ class App extends Component {
 
   componentDidMount() {
     const apiUtils = new ApiUtils();
-    // const films = apiUtils.fetchApiData('films', this.state.isDevMode);
-    // const randomFilm = films.results[this.getRandomInt(0, films.results.length)];
-    // this.setState({ scrollFilm: randomFilm });
-    apiUtils.fetchApiData('films', this.state.isDevMode).then((films)=>{
-      const randomFilm = films.results[this.getRandomInt(0, films.results.length)];
-      this.setState({ scrollFilm: randomFilm });
-     });
+    const filmsArray = apiUtils.getFromLocalStorage('films');
+    if (filmsArray.length === 0) {
+      apiUtils.fetchApiData('films', this.state.isDevMode).then((films) => {
+        apiUtils.saveToLocalStorage('films', films);
+        this.setState({ scrollFilm: this.getRandomFilm(films) });
+      });
+    } else {
+      this.setState({ scrollFilm: this.getRandomFilm(filmsArray) });
+    }
+  }
+
+  getRandomFilm(data) {
+    return data.results[this.getRandomInt(0, data.results.length)];
   }
 
   getRandomInt(min, max) {

@@ -4,16 +4,15 @@ export default class ApiUtils {
 
 
   fetchApiData(requestType, devFlag) {
-
     let returnData;
     switch (requestType) {
       case 'films':
         if (devFlag) {
           returnData = filmsData;
         } else {
-          return fetch(`http://swapi.co/api/${requestType}/`).then((response)=>{
-            returnData = response.json()
-          })
+          return fetch(`http://swapi.co/api/${requestType}/`).then((response) => {
+            return response.json();
+          });
         }
         break;
       case 'people':
@@ -28,8 +27,12 @@ export default class ApiUtils {
     return returnData;
   }
 
-  saveToLocalStorage(data) {}
+  saveToLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
 
-  getFromLocalStorage(data) {}
+  getFromLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key)) || [];
+  }
 
 }

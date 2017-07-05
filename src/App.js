@@ -11,20 +11,20 @@ class App extends Component {
       favorites: [],
       scrollFilm: {},
       isDevMode: false,
-      currentData: []
+      currentData: [],
     };
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(requestType){
-    console.log('click', requestType);
+  handleClick(requestType) {
+    console.log('clicked', requestType);
     const apiUtils = new ApiUtils();
     const dataArray = apiUtils.getFromLocalStorage(requestType);
-    if(dataArray.length === 0){
-      apiUtils.fetchApiData(requestType, this.state.isDevMode).then(data =>{
-        apiUtils.saveToLocalStorage(requestType, data)
-        this.setState({currentData: data})
-      })
+    if (dataArray.length === 0) {
+      apiUtils.fetchApiData(requestType, this.state.isDevMode).then((data) => {
+        apiUtils.saveToLocalStorage(requestType, data);
+        this.setState({ currentData: data });
+      });
     }
   }
 
@@ -32,7 +32,7 @@ class App extends Component {
     const apiUtils = new ApiUtils();
     const filmsArray = apiUtils.getFromLocalStorage('films');
     if (filmsArray.length === 0) {
-      apiUtils.fetchApiData('films', this.state.isDevMode).then(films => {
+      apiUtils.fetchApiData('films', this.state.isDevMode).then((films) => {
         apiUtils.saveToLocalStorage('films', films);
         this.setState({ scrollFilm: this.getRandomFilm(films) });
       });

@@ -1,4 +1,3 @@
-import filmsData from '../test/data/films';
 import { FILMS_URL, PEOPLE_URL, VEHICLES_URL, PLANETS_URL } from './constants';
 
 export default class ApiUtils {
@@ -38,9 +37,45 @@ export default class ApiUtils {
           });
       }
       case 'planets':
-        return fetch(`http://swapi.co/api/${requestType}/`).then((response) => {
-          return response.json();
-        });
+        return fetch(PLANETS_URL)
+          .then((payload) => payload.json())
+          .then((arrOfPlanets) => {
+            arrOfPlanets.results.forEach((planet, i)=>{
+              const unresolvedPromises = planet.residents.map((resident) => {
+                return fetch(resident).then(payload => payload.json())
+                // return fetch(planet.residents.map(e => e)).then(payload => payload.json());
+              });
+              return Promise.all(unresolvedPromises).then(resident => {
+                resident.map((person, i)=>{
+                  console.log(person);
+                  if(!arrOfPlanets['residents_names']){
+                    arrOfPlanets['residents_names'] = [person.name];
+                  } else {
+                    arrOfPlanets['residents_names'] = [...arrOfPlanets['residents_names'], person.name]
+                  }
+                })
+                console.log(resident);
+              })
+              console.log(arrOfPlanets);
+            })
+          })
+
+
+
+
+          // return Promise.all(unresolvedPromises).then((arrOfResidents) => {
+          //   return arrOfResidents.map((resident, i) => {
+          //     return Object.assign(arrOfPlanets[i], {residents: resident.name})
+          //   })
+          // })
+          .then((final) => {
+            // console.log(final);
+            return final
+          })
+
+
+
+
       case 'vehicles':
         return fetch(`http://swapi.co/api/${requestType}/`).then((response) => {
           return response.json();
@@ -56,7 +91,7 @@ export default class ApiUtils {
     return data.map(e => fetch(e).then(payload => payload.json()));
   }
   saveToCache(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
+    // localStorage.setItem(key, JSON.stringify(data));
   }
 
   getFromCache(key) {

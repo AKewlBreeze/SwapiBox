@@ -1,10 +1,10 @@
 import React from 'react';
 import './FavButton.css';
 
-const FavButton = ({ favorites }) => {
+const FavButton = ({ favorites, type, handleClick }) => {
   return (
     <div>
-      <button className='btn-favorite'>
+      <button className='btn-favorite' onClick={() => handleClick(type)}>
         Favorites {favorites.length}
       </button>
     </div>

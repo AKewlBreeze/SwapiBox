@@ -9,6 +9,7 @@ const PeopleCardData = ({ cardData }) => {
       <p>Homeworld: {cardData.homeworld_name}</p>
       <p>Species: {cardData.species_name}</p>
       <p>Homeworld Pop: {cardData.homeworld_population}</p>
+      
     </div>
   );
 };

@@ -9,15 +9,27 @@ export default class ApiUtils {
       case 'people':
         return this.initialFetch(PEOPLE_URL)
           .then(arrOfPeople => this.getPeopleHomeworlds(arrOfPeople))
-          .then(arrOfPeople => this.getPeopleSpecies(arrOfPeople));
+          .then(arrOfPeople => this.getPeopleSpecies(arrOfPeople))
+          .then(arrOfPeople => this.applyDataType(arrOfPeople, 'person'));
       case 'planets':
         return this.initialFetch(PLANETS_URL)
-          .then(arrOfPlanets => this.getPlanetResidents(arrOfPlanets));
+          .then(arrOfPlanets => this.getPlanetResidents(arrOfPlanets))
+          .then(arrOfPlanets => this.applyDataType(arrOfPlanets, 'planet'));
       case 'vehicles':
-        return this.initialFetch(VEHICLES_URL);
+        return this.initialFetch(VEHICLES_URL)
+          .then(arrOfVehicles => this.applyDataType(arrOfVehicles, 'vehicle'));
+      case 'favorites':
+        return new Promise(resolve => resolve(this.getFromCache(url)));
       default:
         return this.initialFetch(url);
     }
+  }
+
+  applyDataType(data, type) {
+    data.results.forEach((e) => {
+      Object.assign(e, { data_type: type });
+    });
+    return data;
   }
 
   getPlanetResidents(data) {
@@ -30,7 +42,6 @@ export default class ApiUtils {
         Object.assign(data.results[i], { resident_names: peopleArr });
       });
     });
-    return data;
   }
 
   initialFetch(url) {
@@ -55,7 +66,7 @@ export default class ApiUtils {
     Promise.all(promises).then((arrOfSpecies) => {
       arrOfSpecies.forEach((species, i) => {
         Object.assign(data.results[i],
-          { species: species.name, language: species.language });
+          { species_name: species.name, language: species.language });
       });
     });
     return data;
@@ -68,7 +79,7 @@ export default class ApiUtils {
 
   getFromCache(key) {
     const cache = JSON.parse(localStorage.getItem(key)) || [];
-    console.log('getting data from cache', cache);
+    // console.log('getting data from cache', cache);
     return cache;
     // return JSON.parse(localStorage.getItem(key)) || [];
   }

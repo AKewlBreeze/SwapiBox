@@ -9,7 +9,7 @@ const Main = ({ favorites, currentData, handleClick }) => {
     <div className='main-container'>
       <div className='title'>
         <p>SWAPI-Box</p>
-        <FavButton favorites={favorites}/>
+        <FavButton favorites={favorites} type='favorites' handleClick={handleClick}/>
       </div>
       <div className='buttons-container'>
         <Button type='people' handleClick={handleClick} />

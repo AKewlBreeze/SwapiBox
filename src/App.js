@@ -25,8 +25,8 @@ class App extends Component {
       this.state.favorites.push(cardData);
       this.setState({ favorites: this.state.favorites });
     } else {
-      // const newFavorites = this.state.favorites.filter(element => element.name !== cardData.name);
-      // this.state.favorites = newFavorites;
+      const newFavorites = this.state.favorites.filter(element => element.name !== cardData.name);
+      this.state.favorites = newFavorites;
       this.setState({
         favorites: this.state.favorites.filter(element => element.name !== cardData.name),
       });
@@ -40,7 +40,7 @@ class App extends Component {
   handleClick(request) {
     const apiUtils = new ApiUtils();
     const cachedData = apiUtils.getFromCache(request);
-    if (cachedData.length === 0) {
+    if (!cachedData) {
       apiUtils.fetchApiData(request).then((data) => {
         apiUtils.saveToCache(request, data);
         this.setState({ currentData: data });
@@ -52,22 +52,26 @@ class App extends Component {
 
   componentDidMount() {
     const apiUtils = new ApiUtils();
-    const filmsArray = apiUtils.getFromCache('films');
-    if (filmsArray.length === 0) {
-      apiUtils.fetchApiData('films').then((films) => {
-        apiUtils.saveToCache('films', films);
-        this.setState({ scrollFilm: this.getRandomFilm(films) });
-      });
-    } else {
-      this.setState({ scrollFilm: this.getRandomFilm(filmsArray) });
-    }
+    this.loadFilms(apiUtils);
+    this.loadFavorites(apiUtils);
+  }
 
-    if (apiUtils.getFromCache('favorites').length === 0) {
-      apiUtils.saveToCache('favorites', { results: [] });
+  loadFilms(utils) {
+    const cachedData = utils.getFromCache('films');
+    if (!cachedData) {
+      utils.fetchApiData('films')
+        .then((films) => {
+          utils.saveToCache('films', films);
+          this.setState({ scrollFilm: this.getRandomFilm(films) });
+        });
     } else {
-      const favorites = apiUtils.getFromCache('favorites').results;
-      this.setState({ favorites });
+      this.setState({ scrollFilm: this.getRandomFilm(cachedData) });
     }
+  }
+
+  loadFavorites(utils) {
+    const favorites = utils.getFromCache('favorites');
+    favorites ? this.setState({ favorites: favorites.results }) : utils.saveToCache('favorites', { results: [] });
   }
 
   getRandomFilm(data) {

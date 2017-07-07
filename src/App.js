@@ -24,7 +24,6 @@ class App extends Component {
         this.setState({ currentData: data });
       });
     } else {
-      console.log(`found ${requestType} in local storage`);
       this.setState({ currentData: cachedData });
     }
   }

@@ -2,89 +2,75 @@ import { FILMS_URL, PEOPLE_URL, VEHICLES_URL, PLANETS_URL } from './constants';
 
 export default class ApiUtils {
 
-  fetchApiData(requestType) {
-    switch (requestType) {
-      case 'films': {
+  fetchApiData(url) {
+    switch (url) {
+      case 'films':
         return this.initialFetch(FILMS_URL);
-      }
-      case 'people': {
+      case 'people':
         return this.initialFetch(PEOPLE_URL)
-          .then(arrOfPeople => this.getPeopleHomeworlds(arrOfPeople.results))
-          .then(arrOfPeople => this.getPeopleSpecies(arrOfPeople))
-          .then(final => final);
-      }
+          .then(arrOfPeople => this.getPeopleHomeworlds(arrOfPeople))
+          .then(arrOfPeople => this.getPeopleSpecies(arrOfPeople));
       case 'planets':
         return this.initialFetch(PLANETS_URL)
-          .then((arrOfPlanets) => {
-            arrOfPlanets.results.map((planet, i) => {
-              const unresolvedPromises = planet.residents.map((url) => {
-                return fetch(url).then(payload => payload.json());
-              });
-
-              Promise.all(unresolvedPromises)
-                .then((data) => {
-                  const peopleArr = [];
-                  data.map((people, index) => {
-                    return peopleArr.push(people.name);
-                  });
-                  Object.assign(arrOfPlanets.results[i], { resident_names: peopleArr });
-                });
-            });
-            return arrOfPlanets;
-          });
+          .then(arrOfPlanets => this.getPlanetResidents(arrOfPlanets));
       case 'vehicles':
         return this.initialFetch(VEHICLES_URL);
       default:
-        return this.initialFetch(requestType);
+        return this.initialFetch(url);
     }
   }
 
+  getPlanetResidents(data) {
+    data.results.forEach((planet, i) => {
+      const promises = planet.residents.map(url => fetch(url).then(payload => payload.json()));
+
+      Promise.all(promises).then((residents) => {
+        const peopleArr = [];
+        residents.map(people => peopleArr.push(people.name));
+        Object.assign(data.results[i], { resident_names: peopleArr });
+      });
+    });
+    return data;
+  }
 
   initialFetch(url) {
-    // console.log('from cache', this.getFromCache(url));
     return fetch(url)
             .then(payload => payload.json())
-            .then((data) => {
-              // console.log('fetched data: ', data);
-              return data;
-            })
             .catch(err => console.log(`error fetching ${url}`, err));
   }
 
   getPeopleHomeworlds(data) {
-    const unresolvedPromises = data.map((person) => {
-      return fetch(person.homeworld).then(payload => payload.json());
-    });
-    return Promise.all(unresolvedPromises).then((arrOfWorlds) => {
-      return arrOfWorlds.map((world, i) => {
-        return Object.assign(data[i],
+    const promises = data.results.map(p => fetch(p.homeworld).then(res => res.json()));
+    Promise.all(promises).then((arrOfWorlds) => {
+      arrOfWorlds.forEach((world, i) => {
+        Object.assign(data.results[i],
           { homeworld_name: world.name, homeworld_population: world.population });
       });
     });
+    return data;
   }
 
   getPeopleSpecies(data) {
-    const unresolvedPromises = data.map((person) => {
-      return fetch(person.species).then(payload => payload.json());
-    });
-    return Promise.all(unresolvedPromises).then((arrOfSpecies) => {
-      return arrOfSpecies.map((species, i) => {
-        return Object.assign(data[i],
+    const promises = data.results.map(p => fetch(p.species).then(res => res.json()));
+    Promise.all(promises).then((arrOfSpecies) => {
+      arrOfSpecies.forEach((species, i) => {
+        Object.assign(data.results[i],
           { species: species.name, language: species.language });
       });
     });
-  }
-
-  getPromisesFromArray(data) {
-    return data.map(e => fetch(e).then(payload => payload.json()));
+    return data;
   }
 
   saveToCache(key, data) {
+    // console.log('saving data to cache', data);
     // localStorage.setItem(key, JSON.stringify(data));
   }
 
   getFromCache(key) {
-    return JSON.parse(localStorage.getItem(key)) || [];
+    const cache = JSON.parse(localStorage.getItem(key)) || [];
+    console.log('getting data from cache', cache);
+    return cache;
+    // return JSON.parse(localStorage.getItem(key)) || [];
   }
 
 }

@@ -15,12 +15,12 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(requestType) {
+  handleClick(request) {
     const apiUtils = new ApiUtils();
-    const cachedData = apiUtils.getFromCache(requestType);
+    const cachedData = apiUtils.getFromCache(request);
     if (cachedData.length === 0) {
-      apiUtils.fetchApiData(requestType).then((data) => {
-        apiUtils.saveToCache(requestType, data);
+      apiUtils.fetchApiData(request).then((data) => {
+        apiUtils.saveToCache(request, data);
         this.setState({ currentData: data });
       });
     } else {

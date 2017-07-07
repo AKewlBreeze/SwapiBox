@@ -5,91 +5,80 @@ export default class ApiUtils {
   fetchApiData(requestType) {
     switch (requestType) {
       case 'films': {
-        return fetch(FILMS_URL).then(res => res.json());
+        return this.initialFetch(FILMS_URL);
       }
       case 'people': {
-        return fetch(PEOPLE_URL)
-          .then(payload => payload.json())
-          .then((arrOfPeople) => {
-            const unresolvedPromises = arrOfPeople.results.map((person) => {
-              return fetch(person.homeworld).then(payload => payload.json());
-            });
-            return Promise.all(unresolvedPromises).then((arrOfWorlds) => {
-              return arrOfWorlds.map((world, i) => {
-                return Object.assign(arrOfPeople.results[i],
-                  { homeworld_name: world.name, homeworld_population: world.population });
-              });
-            });
-          })
-          .then((arrOfPeople) => {
-            const unresolvedPromises = arrOfPeople.map((person) => {
-              return fetch(person.species).then(payload => payload.json());
-            });
-            return Promise.all(unresolvedPromises).then((arrOfSpecies) => {
-              return arrOfSpecies.map((species, i) => {
-                return Object.assign(arrOfPeople[i],
-                  { species: species.name, language: species.language });
-              });
-            });
-          })
-          .then((final) => {
-            return final;
-          });
+        return this.initialFetch(PEOPLE_URL)
+          .then(arrOfPeople => this.getPeopleHomeworlds(arrOfPeople.results))
+          .then(arrOfPeople => this.getPeopleSpecies(arrOfPeople))
+          .then(final => final);
       }
       case 'planets':
-        return fetch(PLANETS_URL)
-          .then((payload) => payload.json())
+        return this.initialFetch(PLANETS_URL)
           .then((arrOfPlanets) => {
-            arrOfPlanets.results.forEach((planet, i)=>{
-              const unresolvedPromises = planet.residents.map((resident) => {
-                return fetch(resident).then(payload => payload.json())
-                // return fetch(planet.residents.map(e => e)).then(payload => payload.json());
+            arrOfPlanets.results.map((planet, i) => {
+              const unresolvedPromises = planet.residents.map((url) => {
+                return fetch(url).then(payload => payload.json());
               });
-              return Promise.all(unresolvedPromises).then(resident => {
-                resident.map((person, i)=>{
-                  console.log(person);
-                  if(!arrOfPlanets['residents_names']){
-                    arrOfPlanets['residents_names'] = [person.name];
-                  } else {
-                    arrOfPlanets['residents_names'] = [...arrOfPlanets['residents_names'], person.name]
-                  }
-                })
-                console.log(resident);
-              })
-              console.log(arrOfPlanets);
-            })
-          })
 
-
-
-
-          // return Promise.all(unresolvedPromises).then((arrOfResidents) => {
-          //   return arrOfResidents.map((resident, i) => {
-          //     return Object.assign(arrOfPlanets[i], {residents: resident.name})
-          //   })
-          // })
-          .then((final) => {
-            // console.log(final);
-            return final
-          })
-
-
-
-
+              Promise.all(unresolvedPromises)
+                .then((data) => {
+                  const peopleArr = [];
+                  data.map((people, index) => {
+                    return peopleArr.push(people.name);
+                  });
+                  Object.assign(arrOfPlanets.results[i], { resident_names: peopleArr });
+                });
+            });
+            return arrOfPlanets;
+          });
       case 'vehicles':
-        return fetch(`http://swapi.co/api/${requestType}/`).then((response) => {
-          return response.json();
-        });
+        return this.initialFetch(VEHICLES_URL);
       default:
-        return fetch(requestType).then((response) => {
-          return response.json();
-        });
+        return this.initialFetch(requestType);
     }
+  }
+
+
+  initialFetch(url) {
+    // console.log('from cache', this.getFromCache(url));
+    return fetch(url)
+            .then(payload => payload.json())
+            .then((data) => {
+              // console.log('fetched data: ', data);
+              return data;
+            })
+            .catch(err => console.log(`error fetching ${url}`, err));
+  }
+
+  getPeopleHomeworlds(data) {
+    const unresolvedPromises = data.map((person) => {
+      return fetch(person.homeworld).then(payload => payload.json());
+    });
+    return Promise.all(unresolvedPromises).then((arrOfWorlds) => {
+      return arrOfWorlds.map((world, i) => {
+        return Object.assign(data[i],
+          { homeworld_name: world.name, homeworld_population: world.population });
+      });
+    });
+  }
+
+  getPeopleSpecies(data) {
+    const unresolvedPromises = data.map((person) => {
+      return fetch(person.species).then(payload => payload.json());
+    });
+    return Promise.all(unresolvedPromises).then((arrOfSpecies) => {
+      return arrOfSpecies.map((species, i) => {
+        return Object.assign(data[i],
+          { species: species.name, language: species.language });
+      });
+    });
   }
 
   getPromisesFromArray(data) {
     return data.map(e => fetch(e).then(payload => payload.json()));
   }
+
   saveToCache(key, data) {
     // localStorage.setItem(key, JSON.stringify(data));
   }

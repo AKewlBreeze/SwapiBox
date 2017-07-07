@@ -7,7 +7,7 @@ const DataView = ({ currentData, handleFavorite, favorites}) => {
 
   let results = [];
   if (currentData) {
-    results = currentData.results.map(card => <Card cardData={card} handleFavorite={handleFavorite}/>);
+    results = currentData.results.map(card => <Card key={Math.round(Date.now()*Math.random())} cardData={card} handleFavorite={handleFavorite} favorites={favorites}/>);
   }
 
   return (

@@ -17,15 +17,20 @@ class App extends Component {
   }
 
   handleFavorite(cardData){
-    // map over favorites [] if any card is present in favorites remove from favorites array otherwise add to []
-    // save to local storage (if not there)
-    // update state
-    this.state.favorites.find((card)=>{
-      if(!card.name === cardData.name){
-        
-      }
+    let exists = this.state.favorites.find(element =>{
+      return element.name === cardData.name;
     })
 
+    if(exists === undefined){
+      this.state.favorites.push(cardData)
+    }else{
+      this.state.favorites = this.state.favorites.filter(element => element.name !== cardData.name)
+    }
+
+    this.setState({favorites: this.state.favorites})
+
+    const apiUtils = new ApiUtils()
+    apiUtils.saveToCache('favorites', {results: this.state.favorites})
   }
 
   handleClick(request) {
@@ -55,6 +60,9 @@ class App extends Component {
 
     if(apiUtils.getFromCache('favorites').length === 0){
       apiUtils.saveToCache('favorites', {results:[]})
+    }else{
+      const favorites = apiUtils.getFromCache('favorites').results
+      this.setState({favorites})
     }
   }
 

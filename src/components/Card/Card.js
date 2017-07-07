@@ -6,7 +6,7 @@ import PlanetCardData from '../CardData/PlanetCardData';
 import VehicleCardData from '../CardData/VehicleCardData';
 
 
-const Card = ({ cardData, handleFavorite}) => {
+const Card = ({ cardData, handleFavorite, favorites}) => {
   // console.log('data for card display', cardData);
   // TODO logic goes here to decide what card detail to render
 
@@ -29,7 +29,7 @@ const Card = ({ cardData, handleFavorite}) => {
 
   return (
     <div className='card'>
-      <CardHeader cardData={cardData} handleFavorite={handleFavorite}/>
+      <CardHeader cardData={cardData} handleFavorite={handleFavorite} favorites={favorites}/>
       {renderCard}
     </div>
   );

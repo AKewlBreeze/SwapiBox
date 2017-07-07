@@ -42,6 +42,7 @@ export default class ApiUtils {
         Object.assign(data.results[i], { resident_names: peopleArr });
       });
     });
+    return data;
   }
 
   initialFetch(url) {

@@ -1,11 +1,22 @@
 import React from 'react';
 import './CardHeader.css';
 
-const CardHeader = ({ cardData, handleFavorite }) => {
+const CardHeader = ({ cardData, handleFavorite, favorites }) => {
+  let exists = favorites.find(element =>{
+    return element.name === cardData.name;
+  })
+  let buttonName;
+  if(exists !== undefined){
+    buttonName = 'unfavorite'
+  }else{
+    buttonName = 'favorite'
+  }
+
+
   return (
     <span className='card-header'>
       {cardData.name}
-      <button onClick={() => handleFavorite(cardData)}> favorites </button>
+      <button onClick={() => handleFavorite(cardData)}> {buttonName} </button>
     </span>
   );
 };

@@ -1,14 +1,15 @@
 import React from 'react';
 import './Card.css';
 import CardHeader from '../CardHeader/CardHeader';
-import CardData from '../CardData/CardData';
 
+const Card = ({ data }) => {
+  console.log('data for card display', data);
+  // TODO logic goes here to decide what card detail to render
 
-const Card = () => {
   return (
     <div className='card'>
-      <CardHeader />
-      <CardData />
+      <CardHeader data={data}/>
+      {/* <CardData data={data}/> */}
     </div>
   );
 };

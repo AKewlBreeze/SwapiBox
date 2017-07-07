@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       favorites: [],
       scrollFilm: {},
-      currentData: [],
+      currentData: null,
     };
     this.handleClick = this.handleClick.bind(this);
   }

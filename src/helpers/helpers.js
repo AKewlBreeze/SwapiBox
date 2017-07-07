@@ -8,9 +8,8 @@ export default class ApiUtils {
         return this.initialFetch(FILMS_URL);
       case 'people':
         return this.initialFetch(PEOPLE_URL)
-          .then(arrOfPeople => this.getPeopleHomeworlds(arrOfPeople))
-          .then(arrOfPeople => this.getPeopleSpecies(arrOfPeople))
-          .then(arrOfPeople => this.applyDataType(arrOfPeople, 'person'));
+             .then(arrOfPeople => this.getPeopleSubdata(arrOfPeople))
+             .then(arrOfPeople => this.applyDataType(arrOfPeople, 'person'));
       case 'planets':
         return this.initialFetch(PLANETS_URL)
           .then(arrOfPlanets => this.getPlanetResidents(arrOfPlanets))
@@ -30,6 +29,12 @@ export default class ApiUtils {
       Object.assign(e, { data_type: type });
     });
     return data;
+  }
+
+  getPeopleSubdata(data) {
+    return Promise.all([this.getPeopleHomeworlds(data), this.getPeopleSpecies(data)])
+      .then(() => data)
+      .catch(err => console.log(err));
   }
 
   getPlanetResidents(data) {
@@ -53,36 +58,30 @@ export default class ApiUtils {
 
   getPeopleHomeworlds(data) {
     const promises = data.results.map(p => fetch(p.homeworld).then(res => res.json()));
-    Promise.all(promises).then((arrOfWorlds) => {
-      arrOfWorlds.forEach((world, i) => {
-        Object.assign(data.results[i],
+    return Promise.all(promises).then((arrOfWorlds) => {
+      return arrOfWorlds.map((world, i) => {
+        return Object.assign(data.results[i],
           { homeworld_name: world.name, homeworld_population: world.population });
       });
     });
-    return data;
   }
 
   getPeopleSpecies(data) {
     const promises = data.results.map(p => fetch(p.species).then(res => res.json()));
-    Promise.all(promises).then((arrOfSpecies) => {
-      arrOfSpecies.forEach((species, i) => {
-        Object.assign(data.results[i],
+    return Promise.all(promises).then((arrOfSpecies) => {
+      return arrOfSpecies.map((species, i) => {
+        return Object.assign(data.results[i],
           { species_name: species.name, language: species.language });
       });
     });
-    return data;
   }
 
   saveToCache(key, data) {
-    // console.log('saving data to cache', data);
     localStorage.setItem(key, JSON.stringify(data));
   }
 
   getFromCache(key) {
-    const cache = JSON.parse(localStorage.getItem(key)) || [];
-    // console.log('getting data from cache', cache);
-    return cache;
-    // return JSON.parse(localStorage.getItem(key)) || [];
+    return JSON.parse(localStorage.getItem(key));
   }
 
 }

@@ -16,21 +16,25 @@ class App extends Component {
     this.handleFavorite = this.handleFavorite.bind(this);
   }
 
-  handleFavorite(cardData){
-    let exists = this.state.favorites.find(element =>{
+  handleFavorite(cardData) {
+    const exists = this.state.favorites.find((element) => {
       return element.name === cardData.name;
-    })
+    });
 
-    if(exists === undefined){
-      this.state.favorites.push(cardData)
-    }else{
-      this.state.favorites = this.state.favorites.filter(element => element.name !== cardData.name)
+    if (exists === undefined) {
+      this.state.favorites.push(cardData);
+      this.setState({ favorites: this.state.favorites });
+    } else {
+      // const newFavorites = this.state.favorites.filter(element => element.name !== cardData.name);
+      // this.state.favorites = newFavorites;
+      this.setState({
+        favorites: this.state.favorites.filter(element => element.name !== cardData.name),
+      });
     }
 
-    this.setState({favorites: this.state.favorites})
 
-    const apiUtils = new ApiUtils()
-    apiUtils.saveToCache('favorites', {results: this.state.favorites})
+    const apiUtils = new ApiUtils();
+    apiUtils.saveToCache('favorites', { results: this.state.favorites });
   }
 
   handleClick(request) {
@@ -58,11 +62,11 @@ class App extends Component {
       this.setState({ scrollFilm: this.getRandomFilm(filmsArray) });
     }
 
-    if(apiUtils.getFromCache('favorites').length === 0){
-      apiUtils.saveToCache('favorites', {results:[]})
-    }else{
-      const favorites = apiUtils.getFromCache('favorites').results
-      this.setState({favorites})
+    if (apiUtils.getFromCache('favorites').length === 0) {
+      apiUtils.saveToCache('favorites', { results: [] });
+    } else {
+      const favorites = apiUtils.getFromCache('favorites').results;
+      this.setState({ favorites });
     }
   }
 

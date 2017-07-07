@@ -42,7 +42,6 @@ export default class ApiUtils {
         Object.assign(data.results[i], { resident_names: peopleArr });
       });
     });
-    return data;
   }
 
   initialFetch(url) {
@@ -67,7 +66,7 @@ export default class ApiUtils {
     Promise.all(promises).then((arrOfSpecies) => {
       arrOfSpecies.forEach((species, i) => {
         Object.assign(data.results[i],
-          { species: species.name, language: species.language });
+          { species_name: species.name, language: species.language });
       });
     });
     return data;

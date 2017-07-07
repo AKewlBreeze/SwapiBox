@@ -1,10 +1,10 @@
 import React from 'react';
 import './CardHeader.css';
 
-const CardHeader = ({ data }) => {
+const CardHeader = ({ cardData }) => {
   return (
     <span className='card-header'>
-      {data.name}
+      {cardData.name}
     </span>
   );
 };

@@ -7,7 +7,7 @@ const DataView = ({ currentData }) => {
 
   let results = [];
   if (currentData) {
-    results = currentData.results.map(card => <Card data={card} />);
+    results = currentData.results.map(card => <Card cardData={card} />);
   }
 
   return (

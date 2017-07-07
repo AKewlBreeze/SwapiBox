@@ -74,7 +74,7 @@ export default class ApiUtils {
 
   saveToCache(key, data) {
     // console.log('saving data to cache', data);
-    // localStorage.setItem(key, JSON.stringify(data));
+    localStorage.setItem(key, JSON.stringify(data));
   }
 
   getFromCache(key) {

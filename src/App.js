@@ -13,6 +13,19 @@ class App extends Component {
       currentData: null,
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleFavorite = this.handleFavorite.bind(this);
+  }
+
+  handleFavorite(cardData){
+    // map over favorites [] if any card is present in favorites remove from favorites array otherwise add to []
+    // save to local storage (if not there)
+    // update state
+    this.state.favorites.find((card)=>{
+      if(!card.name === cardData.name){
+        
+      }
+    })
+
   }
 
   handleClick(request) {
@@ -39,6 +52,10 @@ class App extends Component {
     } else {
       this.setState({ scrollFilm: this.getRandomFilm(filmsArray) });
     }
+
+    if(apiUtils.getFromCache('favorites').length === 0){
+      apiUtils.saveToCache('favorites', {results:[]})
+    }
   }
 
   getRandomFilm(data) {
@@ -57,7 +74,8 @@ class App extends Component {
       <Scroll scrollFilm={this.state.scrollFilm} />
       <Main favorites={this.state.favorites}
         currentData={this.state.currentData}
-        handleClick={this.handleClick} />
+        handleClick={this.handleClick}
+        handleFavorite={this.handleFavorite} />
     </div>
     );
   }

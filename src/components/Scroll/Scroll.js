@@ -1,6 +1,6 @@
 import React from 'react';
+import { shape, string } from 'prop-types';
 import './Scroll.css';
-import PropTypes, { shape, object, string} from 'prop-types';
 
 const Scroll = ({ scrollFilm }) => {
   return (
@@ -12,15 +12,14 @@ const Scroll = ({ scrollFilm }) => {
   );
 };
 
-Scroll.propTypes = {
-  scrollFilm: PropTypes.object
-
-}
-
 const scrollFilm = shape({
-  opening_crawl: 'string',
-  title: 'string',
-  release_date: 'string'
-})
+  opening_crawl: string,
+  title: string,
+  release_date: string,
+});
+
+Scroll.propTypes = {
+  scrollFilm,
+};
 
 export default Scroll;

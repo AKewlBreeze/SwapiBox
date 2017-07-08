@@ -16,27 +16,31 @@ class App extends Component {
     this.handleFavorite = this.handleFavorite.bind(this);
   }
 
-  handleFavorite(cardData){
-    let exists = this.state.favorites.find(element =>{
+  handleFavorite(cardData) {
+    const exists = this.state.favorites.find((element) => {
       return element.name === cardData.name;
-    })
+    });
 
-    if(exists === undefined){
-      this.state.favorites.push(cardData)
-    }else{
-      this.state.favorites = this.state.favorites.filter(element => element.name !== cardData.name)
+    if (exists === undefined) {
+      this.state.favorites.push(cardData);
+      this.setState({ favorites: this.state.favorites });
+    } else {
+      const newFavorites = this.state.favorites.filter(element => element.name !== cardData.name);
+      this.state.favorites = newFavorites;
+      this.setState({
+        favorites: this.state.favorites.filter(element => element.name !== cardData.name),
+      });
     }
 
-    this.setState({favorites: this.state.favorites})
 
-    const apiUtils = new ApiUtils()
-    apiUtils.saveToCache('favorites', {results: this.state.favorites})
+    const apiUtils = new ApiUtils();
+    apiUtils.saveToCache('favorites', { results: this.state.favorites });
   }
 
   handleClick(request) {
     const apiUtils = new ApiUtils();
     const cachedData = apiUtils.getFromCache(request);
-    if (cachedData.length === 0) {
+    if (!cachedData) {
       apiUtils.fetchApiData(request).then((data) => {
         apiUtils.saveToCache(request, data);
         this.setState({ currentData: data });
@@ -48,22 +52,26 @@ class App extends Component {
 
   componentDidMount() {
     const apiUtils = new ApiUtils();
-    const filmsArray = apiUtils.getFromCache('films');
-    if (filmsArray.length === 0) {
-      apiUtils.fetchApiData('films').then((films) => {
-        apiUtils.saveToCache('films', films);
-        this.setState({ scrollFilm: this.getRandomFilm(films) });
-      });
-    } else {
-      this.setState({ scrollFilm: this.getRandomFilm(filmsArray) });
-    }
+    this.loadFilms(apiUtils);
+    this.loadFavorites(apiUtils);
+  }
 
-    if(apiUtils.getFromCache('favorites').length === 0){
-      apiUtils.saveToCache('favorites', {results:[]})
-    }else{
-      const favorites = apiUtils.getFromCache('favorites').results
-      this.setState({favorites})
+  loadFilms(utils) {
+    const cachedData = utils.getFromCache('films');
+    if (!cachedData) {
+      utils.fetchApiData('films')
+        .then((films) => {
+          utils.saveToCache('films', films);
+          this.setState({ scrollFilm: this.getRandomFilm(films) });
+        });
+    } else {
+      this.setState({ scrollFilm: this.getRandomFilm(cachedData) });
     }
+  }
+
+  loadFavorites(utils) {
+    const favorites = utils.getFromCache('favorites');
+    favorites ? this.setState({ favorites: favorites.results }) : utils.saveToCache('favorites', { results: [] });
   }
 
   getRandomFilm(data) {

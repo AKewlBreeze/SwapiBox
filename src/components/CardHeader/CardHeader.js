@@ -2,14 +2,14 @@ import React from 'react';
 import './CardHeader.css';
 
 const CardHeader = ({ cardData, handleFavorite, favorites }) => {
-  let exists = favorites.find(element =>{
+  const exists = favorites.find((element) => {
     return element.name === cardData.name;
-  })
+  });
   let buttonName;
-  if(exists !== undefined){
-    buttonName = 'unfavorite'
-  }else{
-    buttonName = 'favorite'
+  if (exists !== undefined) {
+    buttonName = 'unfavorite';
+  } else {
+    buttonName = 'favorite';
   }
 
 

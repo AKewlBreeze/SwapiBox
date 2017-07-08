@@ -43,11 +43,12 @@ export default class ApiUtils {
     data.results.map((planet, i) => {
       const promises = planet.residents.map(url => fetch(url).then(payload => payload.json()));
 
-      return Promise.all(promises).then((residents) => {
+      Promise.all(promises).then((residents) => {
         const peopleArr = [];
         residents.map(people => peopleArr.push(people.name));
         return Object.assign(data.results[i], { resident_names: peopleArr });
       });
+      return promises;
     });
     return data;
   }

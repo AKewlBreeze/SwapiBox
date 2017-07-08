@@ -1,6 +1,5 @@
 .card {
   width: 250px;
-  height: 169px;
   margin: 10px;
   padding: 10px;
   border: 1px solid black;
@@ -9,4 +8,16 @@
 .planet-card-data {
   width: 200px;
   padding: 10px;
+}
+
+.people-card {
+  background-image: url('../../img/people-card-background.png')
+}
+
+.vehicle-card {
+  background-image: url('../../img/vehicle-card-background.png')
+}
+
+.planet-card {
+  background-image: url('../../img/planet-card-background.png')
 }

@@ -3,6 +3,7 @@ import './CardData.css';
 
 const PlanetCardData = ({ cardData }) => {
   // TODO iterate resident names for display
+  console.log(cardData.resident_names);
 
   return (
     <div className='planet-card-data'>

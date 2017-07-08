@@ -16,7 +16,7 @@ const CardHeader = ({ cardData, handleFavorite, favorites }) => {
   return (
     <span className='card-header'>
       {cardData.name}
-      <button onClick={() => handleFavorite(cardData)}> {buttonName} </button>
+      <button className = 'favorites-add' onClick={() => handleFavorite(cardData)}> {buttonName} </button>
     </span>
   );
 };

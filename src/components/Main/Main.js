@@ -8,7 +8,7 @@ const Main = ({ favorites, currentData, handleClick, handleFavorite }) => {
   return (
     <div className='main-container'>
       <div className='title'>
-        <p>SWAPI-Box</p>
+        <h1>SWAPI-Box</h1>
         <FavButton favoritesCount={favorites.length} type='favorites' handleClick={handleClick} />
       </div>
       <div className='buttons-container'>

@@ -1,11 +1,16 @@
+h1 {
+  margin-left: 39%;
+}
+
 .main-container {
-  flex-grow: 1;
   align-items: center;
+  flex-grow: 1;
   justify-content: center;
 }
 
 .title {
   display: flex;
+  align-items: flex-start;
   flex-direction: row;
   justify-content: space-between;
 }
@@ -13,6 +18,11 @@
 .buttons-container {
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: space-around;
+  width: 100%;
+}
+
+.btn-favorite {
+  float: right;
+  margin-top: 50%;
 }

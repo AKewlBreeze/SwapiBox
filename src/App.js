@@ -32,7 +32,6 @@ class App extends Component {
       });
     }
 
-
     const apiUtils = new ApiUtils();
     apiUtils.saveToCache('favorites', { results: this.state.favorites });
   }

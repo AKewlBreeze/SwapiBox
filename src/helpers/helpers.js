@@ -38,7 +38,7 @@ export default class ApiUtils {
   }
 
   getPlanetResidents(data) {
-    data.results.forEach((planet, i) => {
+    data.results.map((planet, i) => {
       const promises = planet.residents.map(url => fetch(url).then(payload => payload.json()));
 
       return Promise.all(promises).then((residents) => {

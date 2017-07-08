@@ -38,6 +38,8 @@ export default class ApiUtils {
   }
 
   getPlanetResidents(data) {
+    // TODO This isn't working in that the object.assign
+    // is never persisting to the planet objects the way it should.
     data.results.map((planet, i) => {
       const promises = planet.residents.map(url => fetch(url).then(payload => payload.json()));
 

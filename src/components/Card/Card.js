@@ -6,12 +6,7 @@ import PlanetCardData from '../CardData/PlanetCardData';
 import VehicleCardData from '../CardData/VehicleCardData';
 
 
-const Card = ({ cardData, handleFavorite, favorites}) => {
-  // console.log('data for card display', cardData);
-  // TODO logic goes here to decide what card detail to render
-
-  // console.log(cardData.data_type);
-
+const Card = ({ cardData, handleFavorite, favorites }) => {
   let renderCard;
   switch (cardData.data_type) {
     case 'person':

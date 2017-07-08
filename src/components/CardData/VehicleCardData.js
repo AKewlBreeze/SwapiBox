@@ -4,10 +4,10 @@ import './CardData.css';
 const VehicleCardData = ({ cardData }) => {
   return (
     <div className='vehicle-card-data'>
-      <p>{cardData.name}</p>
-      <p>{cardData.model}</p>
-      <p>{cardData.class}</p>
-      <p>{cardData.passengers}</p>
+      <p>Name: {cardData.name}</p>
+      <p>Model: {cardData.model}</p>
+      <p>Class: {cardData.vehicle_class}</p>
+      <p>Passengers: {cardData.passengers}</p>
     </div>
   );
 };

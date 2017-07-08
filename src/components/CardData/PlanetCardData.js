@@ -6,11 +6,11 @@ const PlanetCardData = ({ cardData }) => {
 
   return (
     <div className='planet-card-data'>
-      <p>{cardData.name}</p>
-      <p>{cardData.terrain}</p>
-      <p>{cardData.population}</p>
-      <p>{cardData.climate}</p>
-      <p>{cardData.resident_names}</p>
+      <p>Name: {cardData.name}</p>
+      <p>Terrain: {cardData.terrain}</p>
+      <p>Population: {cardData.population}</p>
+      <p>Climate: {cardData.climate}</p>
+      <p>Residents: {cardData.resident_names}</p>
     </div>
   );
 };

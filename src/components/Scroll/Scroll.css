@@ -2,32 +2,21 @@
   width: 300px;
   min-width: 300px;
   background-color: #000;
-  /*background-image: url('../../img/stars-background.png');*/
 }
 
-
-/*.fade {
-  position: relative;
-  width: 100%;
-  min-height: 30vh;
-  top: -25px;
-  z-index: 1;
-  background-image: url('../../img/stars-background.png');
-}*/
-
 .star-wars {
+  position: relative;
   display: flex;
   justify-content: center;
-  position: relative;
-  height: 1000px;
+  text-align: justify;
+  letter-spacing: 3px;
   color: #feda4a;
   font-family: 'Pathway Gothic One', sans-serif;
   font-size: 150%;
   font-weight: 300;
-  letter-spacing: 3px;
   line-height: 150%;
   perspective: 400px;
-  text-align: justify;
+  background-image: url('../../img/stars-background.png');
 }
 
 .crawl {
@@ -38,12 +27,12 @@
 }
 
 .crawl>.title {
-  font-size: 80%;
-  text-align: center;
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  text-align: center;
+  font-size: 80%;
 }
 
 .crawl>.title h1 {
@@ -53,7 +42,7 @@
 
 @keyframes crawl {
   0% {
-    top: 0;
+    top: 200px;
     transform: rotateX(20deg) translateZ(0);
   }
   100% {

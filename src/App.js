@@ -26,7 +26,10 @@ class App extends Component {
       this.setState({ favorites: this.state.favorites });
     } else {
       const newFavorites = this.state.favorites.filter(element => element.name !== cardData.name);
-      this.setState({ favorites: newFavorites });
+      this.state.favorites = newFavorites;
+      this.setState({
+        favorites: this.state.favorites.filter(element => element.name !== cardData.name),
+      });
     }
 
     const apiUtils = new ApiUtils();

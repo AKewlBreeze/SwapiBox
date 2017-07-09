@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import Scroll from './components/Scroll/Scroll';
 import Main from './components/Main/Main';
 import ApiUtils from './helpers/helpers';
+
 
 class App extends Component {
   constructor() {

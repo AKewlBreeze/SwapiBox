@@ -1,27 +1,29 @@
 import React from 'react';
-import FavButton from './FavButton.js';
-import fetchMock from 'fetch-mock'
+import fetchMock from 'fetch-mock';
 import { shallow } from 'enzyme';
+import FavButton from './FavButton';
 
-describe('FavButton test', () =>{
-  let mockFn = jest.fn()
+describe('FavButton test', () => {
+  const mockedFn = jest.fn();
+  const type = 'people';
 
-it('renders a container element', () => {
-  const dom = shallow(<Button />);
+  it('renders a container element', () => {
+    const dom = shallow(<FavButton />);
 
-  expect(dom.find('.btn-favorite')).toHaveLength(1);
-});
-
-
-it('has a button', () =>{
-  const mockFn = jest.fn()
-  const dom = shallow(<button onClick= {()=>{mockFn}}/>)
-  const buttonFound = dom.find('.btn-favorite').first()
-  buttonFound.simulate('click')
-
-  expect(mockFn).toBeCalled()
-})
+    expect(dom.find('.btn-favorite')).toHaveLength(1);
+  });
 
 
+  it('has a button', () => {
+    const dom = shallow(
+      <FavButton favoritesCount={[]}
+        type={ type }
+        handleClick={ mockedFn }/>,
+      );
+    const button = dom.find('.btn-favorite');
+    button.simulate('click');
 
+    expect(mockedFn).toHaveBeenCalledTimes(1);
+    expect(mockedFn).toHaveBeenCalledWith(type);
+  });
 });

@@ -1,3 +1,32 @@
+.btn-data {
+  width: 100px;
+  height: 35px;
+  padding-right: 15px;
+  padding-left: 35px;
+  color: #FBFFFE;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  background-color: #62A0DB;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-position-x: 10%;
+  background-size: 20px;
+}
+
 .btn-data:hover {
   cursor: pointer;
+  background-color: #155C9E;
+}
+
+.btn-people {
+  background-image: url("../../img/people-icon.png");
+}
+
+.btn-planets {
+  background-image: url("../../img/planets-icon.png");
+}
+
+.btn-vehicles {
+  background-image: url("../../img/vehicles-icon.png");
 }

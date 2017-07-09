@@ -6,7 +6,7 @@ const Scroll = ({ scrollFilm }) => {
   return (
     <div className='scroll-container'>
       <p className='scroll-crawl'>{scrollFilm.opening_crawl}</p>
-      <p className='scroll-title'>{scrollFilm.title}</p>
+      <h2 className='scroll-title'>{scrollFilm.title}</h2>
       <p className='scroll-release-date'>{scrollFilm.release_date}</p>
     </div>
   );

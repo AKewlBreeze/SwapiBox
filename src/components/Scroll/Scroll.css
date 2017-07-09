@@ -1,4 +1,51 @@
 .scroll-container {
-  width: 250px;
-  padding: 15px;
+  display: inline-block;
+    position: fixed;
+  	width: 35%;
+  	height: 100em;
+  	bottom: 0;
+  	left: 1%;
+  	/*margin-left: -10px;*/
+    color: #ffe45e;
+  	font-size: 30px;
+  	font-weight: bold;
+  	text-align: left;
+  	overflow: hidden;
+  	transform-origin: 50% 99%;
+  	transform: perspective(380px) rotateX(25deg);
+}
+
+.scroll-title{
+  text-align: center;
+}
+
+@keyframes movingTopToBottom {
+  0% {
+    bottom: -15px;
+  }
+  95% {
+    bottom: 150px;
+  }
+  250%{
+    bottom: 165px;
+  }
+}
+
+
+.scroll-container {
+  height:1000px;
+  /*overflow: hidden;*/
+  animation: movingBottomToTop  ease infinite;
+  -webkit-animation: movingBottomToTop ease infinite;
+  position: absolute;
+}
+
+
+
+.scroll-crawl{
+  animation: movingTopToBottom 5s linear infinite;
+  position: relative;
+  background: lightblue;
+  display: inline-block;
+  padding: 10px;
 }

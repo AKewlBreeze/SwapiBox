@@ -12,7 +12,6 @@ const CardHeader = ({ cardData, handleFavorite, favorites }) => {
     buttonName = 'favorite';
   }
 
-
   return (
     <span className='card-header'>
       {cardData.name}

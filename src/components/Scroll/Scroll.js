@@ -1,5 +1,7 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
+import { FILM_NUMBERS } from '../../helpers/constants';
+
 import './Scroll.css';
 
 const Scroll = ({ scrollFilm }) => {
@@ -9,13 +11,14 @@ const Scroll = ({ scrollFilm }) => {
     //   <p className='scroll-title'>{scrollFilm.title}</p>
     //   <p className='scroll-release-date'>{scrollFilm.release_date}</p>
     // </div>
-
+    <div>
+    <div className="fade"></div>
     <section className='scroll-container star-wars'>
 
       <div className="crawl">
 
         <div className="title">
-          <p>Episode {scrollFilm.episode_id}</p>
+          <p>Episode {FILM_NUMBERS[scrollFilm.episode_id]}</p>
           <h1>{scrollFilm.title}</h1>
         </div>
 
@@ -25,7 +28,7 @@ const Scroll = ({ scrollFilm }) => {
       </div>
 
     </section>
-
+  </div>
   );
 };
 

@@ -1,11 +1,12 @@
 h1 {
-  margin-left: 39%;
+  margin-left: 40%;
 }
 
 .main-container {
   align-items: center;
   flex-grow: 1;
   justify-content: center;
+  background-image: url('../../img/stars-background.png');
 }
 
 .title {

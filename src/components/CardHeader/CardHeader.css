@@ -1,3 +1,7 @@
-.favorites-add {
+.btn-add-favorite {
   float: right;
+}
+
+.btn-add-favorite:hover {
+  cursor: pointer;
 }

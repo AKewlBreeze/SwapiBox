@@ -38,14 +38,17 @@ export default class ApiUtils {
   }
 
   getPlanetResidents(data) {
-    data.results.forEach((planet, i) => {
+    // TODO This isn't working in that the object.assign
+    // is never persisting to the planet objects the way it should.
+    data.results.map((planet, i) => {
       const promises = planet.residents.map(url => fetch(url).then(payload => payload.json()));
 
-      return Promise.all(promises).then((residents) => {
+      Promise.all(promises).then((residents) => {
         const peopleArr = [];
         residents.map(people => peopleArr.push(people.name));
         return Object.assign(data.results[i], { resident_names: peopleArr });
       });
+      return promises;
     });
     return data;
   }

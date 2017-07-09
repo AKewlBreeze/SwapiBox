@@ -1,66 +1,139 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CardData from './CardData';
-import PeopleCardData from './CardData';
-import PlanetCardData from './CardData';
-import VehicleCardData from './CardData';
+import PeopleCardData from './PeopleCardData';
+import PlanetCardData from './PlanetCardData';
+import VehicleCardData from './VehicleCardData';
 
-describe('CardData testing',()=>{
+describe('PeopleCardData testing', () => {
+  const cardData = {
+    name: 'Luke',
+    homeworld_name: 'Tatooine',
+    homeworld_population: '20000',
+    species_name: 'Human',
+  };
 
-it('renders a container element', () => {
-  const dom = shallow(<CardData />);
+  it('renders a container element', () => {
+    const dom = shallow(<PeopleCardData cardData={ cardData }/>);
 
-  expect(dom.find('.card-data')).toHaveLength(1);
+    expect(dom.find('.people-card-data')).toHaveLength(1);
+  });
+
+  it('renders a name', () => {
+    const dom = shallow(<PeopleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.name').length).toBe(1);
+    expect(dom.find('.name').text()).toEqual('Luke');
+  });
+
+  it('renders a homeworld', () => {
+    const dom = shallow(<PeopleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.homeworld').length).toBe(1);
+    expect(dom.find('.homeworld').text()).toEqual('Tatooine');
+  });
+
+  it('renders a species', () => {
+    const dom = shallow(<PeopleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.species').length).toBe(1);
+    expect(dom.find('.species').text()).toEqual('Human');
+  });
+
+  it('renders a homeworld population', () => {
+    const dom = shallow(<PeopleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.homeworld-population').length).toBe(1);
+    expect(dom.find('.homeworld-population').text()).toEqual('20000');
+  });
 });
 
-it("has a class of PeopleCardData", () => {
-    const mockClick = jest.fn();
-    const wrapper = shallow(
-      <PeopleCard data={mockPeople} addFavorite={mockClick} favorites={[]} />
-    );
+describe('PlanetCardData testing', () => {
+  const cardData = {
+    name: 'Tatooine',
+    terrain: 'desert',
+    population: '20000',
+    climate: 'windy, arid',
+    residents: ['Luke', 'Obi-Wan'],
+  };
 
-    expect(wrapper.find(".people-card-data").length).toBe(1);
+  it('renders a container element', () => {
+    const dom = shallow(<PlanetCardData cardData={ cardData }/>);
+
+    expect(dom.find('.planet-card-data')).toHaveLength(1);
   });
 
-    it("has a class of PlanetCardData", () => {
-        const mockClick = jest.fn();
-        const wrapper = shallow(
-          <PlanetCardData  />
-        );
+  it('renders a name', () => {
+    const dom = shallow(<PlanetCardData cardData={ cardData }/>);
 
-        expect(wrapper.find(".planet-card-data").length).toBe(1);
-      });
-
-      it("has a class of VehicleCardData", () => {
-          const mockClick = jest.fn();
-          const wrapper = shallow(
-            <VehicleCardData  />
-          );
-
-          expect(wrapper.find(".vehicle-card-data").length).toBe(1);
-        });
-
-
-
-  it("evaluates the number of card elements ", () => {
-    const mockClick = jest.fn();
-    const wrapper = shallow(
-      <PeopleCard data={mockPeople} addFavorite={mockClick} favorites={[]} />
-    );
-
-    expect(wrapper.find("p").length).toBe(4);
+    expect(dom.find('.name').length).toBe(1);
+    expect(dom.find('.name').text()).toEqual('Tatooine');
   });
 
-  it("checks to see that favorites function has been called", () => {
-    const mockClick = jest.fn();
-    const wrapper = shallow(
-      <PeopleCard data={mockPeople} addFavorite={mockClick} favorites={[]} />
-    );
+  it('renders a terrain', () => {
+    const dom = shallow(<PlanetCardData cardData={ cardData }/>);
 
-    const button = wrapper.find(".peopleCardInfo").children().first();
-    button.simulate("click");
-    expect(mockClick).toBeCalled();
+    expect(dom.find('.terrain').length).toBe(1);
+    expect(dom.find('.terrain').text()).toEqual('desert');
+  });
+  it('renders a population', () => {
+    const dom = shallow(<PlanetCardData cardData={ cardData }/>);
+
+    expect(dom.find('.population').length).toBe(1);
+    expect(dom.find('.population').text()).toEqual('20000');
+  });
+  it('renders a climate', () => {
+    const dom = shallow(<PlanetCardData cardData={ cardData }/>);
+
+    expect(dom.find('.climate').length).toBe(1);
+    expect(dom.find('.climate').text()).toEqual('windy, arid');
+  });
+  it('renders a residents', () => {
+    const dom = shallow(<PlanetCardData cardData={ cardData }/>);
+
+    expect(dom.find('.residents').length).toBe(1);
+    expect(dom.find('.residents').text()).toEqual('Luke, Obi-Wan');
+  });
+});
+
+describe('VehicleCardData testing', () => {
+  const cardData = {
+    name: 'At-At',
+    model: 'walker',
+    vehicle_class: 'badass',
+    passengers: '24',
+  };
+
+  it('renders a container element', () => {
+    const dom = shallow(<VehicleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.vehicle-card-data')).toHaveLength(1);
   });
 
+  it('renders a name', () => {
+    const dom = shallow(<VehicleCardData cardData={ cardData }/>);
 
+    expect(dom.find('.name').length).toBe(1);
+    expect(dom.find('.name').text()).toEqual('At-At');
+  });
+
+  it('renders a model', () => {
+    const dom = shallow(<VehicleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.model').length).toBe(1);
+    expect(dom.find('.model').text()).toEqual('walker');
+  });
+
+  it('renders a vehicle class', () => {
+    const dom = shallow(<VehicleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.vehicle-class').length).toBe(1);
+    expect(dom.find('.vehicle-class').text()).toEqual('badass');
+  });
+
+  it('renders a passengers', () => {
+    const dom = shallow(<VehicleCardData cardData={ cardData }/>);
+
+    expect(dom.find('.passengers').length).toBe(1);
+    expect(dom.find('.passengers').text()).toEqual('24');
+  });
 });

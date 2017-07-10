@@ -2,7 +2,7 @@
   float: right;
   width: 120px;
   height: 35px;
-  margin-top: 50%;
+  margin-top: 62%;
   margin-right: 30px;
   margin-bottom: 30px;
   padding-right: 35px;
@@ -15,6 +15,9 @@
   background-repeat: no-repeat;
   background-position-x: 90%;
   background-size: 30px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn-favorite-view:hover {

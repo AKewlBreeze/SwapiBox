@@ -5,7 +5,7 @@ const FavButton = ({ favoritesCount, type, handleClick }) => {
   return (
     <div>
       <button className='btn-favorite' onClick={() => handleClick(type)}>
-        My Favorites {favoritesCount}
+        Favorites: {favoritesCount}
       </button>
     </div>
   );

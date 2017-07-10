@@ -1,7 +1,32 @@
-.btn-add-favorite {
-  float: right;
+.card-header {
+  height: 30px;
+  vertical-align: bottom;
+  display: block;
+  font-size: 24px;
+  background-color: #9D5A61;
+  padding: 5px;
+  border-radius: 10px;
 }
 
-.btn-add-favorite:hover {
+.btn-favorite-inactive {
+  background-image: url("../../img/favorite-inactive.png");
+}
+
+.btn-favorite-active {
+  background-image: url("../../img/favorite-active.png");
+}
+
+.btn-favorite {
+  float: right;
+  width: 30px;
+  height: 30px;
+  outline: none;
+  border: none;
+  background-size: contain;
+  background-color: transparent;
+}
+
+.btn-favorite:hover {
   cursor: pointer;
+  background-image: url("../../img/favorite-hover.png");
 }

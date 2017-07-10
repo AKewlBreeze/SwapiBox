@@ -1,9 +1,9 @@
 import React from 'react';
-import './Card.css';
 import CardHeader from '../CardHeader/CardHeader';
 import PeopleCardData from '../CardData/PeopleCardData';
 import PlanetCardData from '../CardData/PlanetCardData';
 import VehicleCardData from '../CardData/VehicleCardData';
+import './Card.css';
 
 
 const Card = ({ cardData, handleFavorite, favorites }) => {

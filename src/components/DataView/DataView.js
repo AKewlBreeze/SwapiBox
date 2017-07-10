@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, func, array } from 'prop-types';
 import Card from '../Card/Card';
 import './DataView.css';
 
@@ -19,6 +20,16 @@ const DataView = ({ currentData, handleFavorite, favorites }) => {
       { results }
     </div>
   );
+};
+
+const currentData = shape({
+  results: array,
+});
+
+DataView.propType = {
+  currentData,
+  handleFavorite: func,
+  favorites: array,
 };
 
 export default DataView;

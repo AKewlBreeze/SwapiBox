@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, func } from 'prop-types';
 import './Button.css';
 
 const Button = ({ type, handleClick }) => {
@@ -23,6 +24,11 @@ const Button = ({ type, handleClick }) => {
         onClick={() => handleClick(type)}> {type.toUpperCase()} </button>
     </div>
   );
+};
+
+Button.propTypes = {
+  type: string,
+  handleClick: func,
 };
 
 export default Button;

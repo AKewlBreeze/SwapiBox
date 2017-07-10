@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, func, array } from 'prop-types';
 import FavButton from '../FavButton/FavButton';
 import Button from '../Button/Button';
 import DataView from '../DataView/DataView';
@@ -20,6 +21,17 @@ const Main = ({ favorites, currentData, handleClick, handleFavorite }) => {
       <DataView currentData={currentData} handleFavorite={handleFavorite} favorites={favorites}/>
     </div>
   );
+};
+
+const currentData = shape({
+  results: array,
+});
+
+Main.propType = {
+  favorites: array,
+  currentData,
+  handleClick: func,
+  handleFavorite: func,
 };
 
 export default Main;

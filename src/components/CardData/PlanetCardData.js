@@ -1,9 +1,9 @@
 import React from 'react';
+import { shape, string, array } from 'prop-types';
 import './CardData.css';
 
 const PlanetCardData = ({ cardData }) => {
   // TODO iterate resident names for display
-  console.log(cardData.resident_names);
 
   return (
     <div className='planet-card-data'>
@@ -14,6 +14,20 @@ const PlanetCardData = ({ cardData }) => {
       <p className='card-data'>Residents: <span className='residents'>{cardData.resident_names}</span></p>
     </div>
   );
+};
+
+const cardData = shape({
+  name: string,
+  data_type: string,
+  terrain: string,
+  population: string,
+  climate: string,
+  resident_names: array,
+});
+
+
+PlanetCardData.propType = {
+  cardData,
 };
 
 export default PlanetCardData;

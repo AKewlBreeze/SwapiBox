@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, string, func, array } from 'prop-types';
 import CardHeader from '../CardHeader/CardHeader';
 import PeopleCardData from '../CardData/PeopleCardData';
 import PlanetCardData from '../CardData/PlanetCardData';
@@ -32,6 +33,17 @@ const Card = ({ cardData, handleFavorite, favorites }) => {
       {renderCard}
     </div>
   );
+};
+
+const cardData = shape({
+  name: string,
+  data_type: string,
+});
+
+Card.propType = {
+  cardData,
+  handleFavorite: func,
+  favorites: array,
 };
 
 export default Card;

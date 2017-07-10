@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, string, func, array } from 'prop-types';
 import './CardHeader.css';
 
 const CardHeader = ({ cardData, handleFavorite, favorites }) => {
@@ -18,6 +19,17 @@ const CardHeader = ({ cardData, handleFavorite, favorites }) => {
       <button className={buttonStyle} onClick={() => handleFavorite(cardData)} />
     </span>
   );
+};
+
+const cardData = shape({
+  name: string,
+  data_type: string,
+});
+
+CardHeader.propType = {
+  cardData,
+  handleFavorite: func,
+  favorites: array,
 };
 
 export default CardHeader;

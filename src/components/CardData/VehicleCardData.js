@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, string } from 'prop-types';
 import './CardData.css';
 
 const VehicleCardData = ({ cardData }) => {
@@ -10,6 +11,18 @@ const VehicleCardData = ({ cardData }) => {
       <p className='card-data'>Passengers: <span className='passengers'>{cardData.passengers}</span></p>
     </div>
   );
+};
+
+const cardData = shape({
+  name: string,
+  data_type: string,
+  model: string,
+  vehicle_class: string,
+  passengers: string,
+});
+
+VehicleCardData.propType = {
+  cardData,
 };
 
 export default VehicleCardData;

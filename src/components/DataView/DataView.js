@@ -4,8 +4,6 @@ import Card from '../Card/Card';
 import './DataView.css';
 
 const DataView = ({ currentData, handleFavorite, favorites }) => {
-  console.log('currentData in DataView', currentData);
-
   let results = [];
   if (currentData) {
     results = currentData.results.map(card =>

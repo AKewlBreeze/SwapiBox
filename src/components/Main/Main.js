@@ -2,13 +2,14 @@ import React from 'react';
 import FavButton from '../FavButton/FavButton';
 import Button from '../Button/Button';
 import DataView from '../DataView/DataView';
+
 import './Main.css';
 
 const Main = ({ favorites, currentData, handleClick, handleFavorite }) => {
   return (
     <div className='main-container'>
       <div className='title'>
-        <h1>SWAPI-Box</h1>
+        <h1 className='swapi'>SWAPI-Box</h1>
         <FavButton favoritesCount={favorites.length} type='favorites' handleClick={handleClick} />
       </div>
       <div className='buttons-container'>

@@ -6,17 +6,17 @@ const CardHeader = ({ cardData, handleFavorite, favorites }) => {
   const exists = favorites.find((element) => {
     return element.name === cardData.name;
   });
-  let buttonName;
+  let buttonStyle;
   if (exists !== undefined) {
-    buttonName = 'unfavorite';
+    buttonStyle = 'btn-favorite btn-favorite-active';
   } else {
-    buttonName = 'favorite';
+    buttonStyle = 'btn-favorite btn-favorite-inactive';
   }
 
   return (
     <span className='card-header'>
       {cardData.name}
-      <button className='btn-add-favorite' onClick={() => handleFavorite(cardData)}> {buttonName} </button>
+      <button className={buttonStyle} onClick={() => handleFavorite(cardData)} />
     </span>
   );
 };

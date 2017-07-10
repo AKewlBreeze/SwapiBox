@@ -1,3 +1,22 @@
-.btn-favorite:hover {
+.btn-favorite-view {
+  float: right;
+  width: 120px;
+  height: 35px;
+  margin-top: 50%;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  padding-right: 35px;
+  color: #FBFFFE;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  background-color: #62A0DB;
+  background-image: url("../../img/favorite-active.png");
+  background-repeat: no-repeat;
+  background-position-x: 90%;
+  background-size: 30px;
+}
+
+.btn-favorite-view:hover {
   cursor: pointer;
 }

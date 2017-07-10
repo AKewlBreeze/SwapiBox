@@ -1,0 +1,9 @@
+.card-data {
+  font-weight: 600;
+  font-style: italic;
+  margin: 5px;
+}
+
+.card-data>span {
+  font-weight: normal;
+}

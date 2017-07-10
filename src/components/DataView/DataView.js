@@ -17,7 +17,7 @@ const DataView = ({ currentData, handleFavorite, favorites }) => {
 
   return (
     <div className='card-container'>
-        { results }
+      { results }
     </div>
   );
 };

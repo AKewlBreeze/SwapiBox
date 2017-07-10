@@ -3,11 +3,15 @@
   margin: 10px;
   padding: 10px;
   border: 1px solid black;
+  border-radius: 10px;
+  font-family: 'Pathway Gothic One', sans-serif;
 }
 
-.planet-card-data {
+.planet-card-data,
+.people-card-data,
+.vehicle-card-data {
   width: 200px;
-  padding: 10px;
+  padding: 3px;
 }
 
 .people-card,

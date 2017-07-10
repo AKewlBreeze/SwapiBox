@@ -6,29 +6,16 @@ import './Scroll.css';
 
 const Scroll = ({ scrollFilm }) => {
   return (
-    // <div className='scroll-container'>
-    //   <p className='scroll-crawl'>{scrollFilm.opening_crawl}</p>
-    //   <p className='scroll-title'>{scrollFilm.title}</p>
-    //   <p className='scroll-release-date'>{scrollFilm.release_date}</p>
-    // </div>
-    <div>
-    <div className="fade"></div>
     <section className='scroll-container star-wars'>
-
       <div className="crawl">
-
         <div className="title">
           <p>Episode {FILM_NUMBERS[scrollFilm.episode_id]}</p>
           <h1>{scrollFilm.title}</h1>
         </div>
-
         <p className='scroll-crawl'>{scrollFilm.opening_crawl}</p>
         <p className='scroll-release-date'>{scrollFilm.release_date}</p>
-
       </div>
-
     </section>
-  </div>
   );
 };
 

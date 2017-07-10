@@ -1,6 +1,7 @@
 h1 {
   margin-left: 40%;
-  color: #FBFFFE;
+  color: #F7D719;
+
 }
 
 .main-container {
@@ -26,5 +27,8 @@ h1 {
 
 .swapi{
   margin-left: 5%;
-  padding:10%;
+  padding:49px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }

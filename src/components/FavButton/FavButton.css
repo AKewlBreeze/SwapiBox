@@ -15,6 +15,9 @@
   background-repeat: no-repeat;
   background-position-x: 90%;
   background-size: 30px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn-favorite-view:hover {

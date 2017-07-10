@@ -1,4 +1,4 @@
-.btn-favorite {
+.btn-favorite-view {
   width: 120px;
   height: 35px;
   margin-right: 30px;
@@ -15,6 +15,6 @@
   background-image: url("../../img/favorite-active.png");
 }
 
-.btn-favorite:hover {
+.btn-favorite-view:hover {
   cursor: pointer;
 }

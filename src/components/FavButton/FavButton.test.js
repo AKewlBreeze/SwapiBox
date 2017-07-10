@@ -15,14 +15,25 @@ describe('FavButton test', () => {
 
   it('renders a button', () => {
     const dom = shallow(
-      <FavButton favoritesCount={[]}
+      <FavButton favoritesCount={2}
         type={ type }
         handleClick={ mockedFn }/>,
       );
     const button = dom.find('.btn-favorite');
+    expect(button).toHaveLength(1);
     button.simulate('click');
 
     expect(mockedFn).toHaveBeenCalledTimes(1);
     expect(mockedFn).toHaveBeenCalledWith(type);
+  });
+
+  it('renders a favorite count in the button', () => {
+    const dom = shallow(
+      <FavButton favoritesCount={2}
+        type={ type }
+        handleClick={ mockedFn }/>,
+      );
+    const button = dom.find('.btn-favorite');
+    expect(button.text()).toEqual('Favorites: 2');
   });
 });

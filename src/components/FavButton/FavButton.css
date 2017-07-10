@@ -1,6 +1,8 @@
 .btn-favorite-view {
+  float: right;
   width: 120px;
   height: 35px;
+  margin-top: 50%;
   margin-right: 30px;
   margin-bottom: 30px;
   padding-right: 35px;
@@ -9,10 +11,10 @@
   border-radius: 12px;
   outline: none;
   background-color: #62A0DB;
+  background-image: url("../../img/favorite-active.png");
   background-repeat: no-repeat;
   background-position-x: 90%;
   background-size: 30px;
-  background-image: url("../../img/favorite-active.png");
 }
 
 .btn-favorite-view:hover {

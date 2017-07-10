@@ -1,34 +1,26 @@
 import React from 'react';
-import Button from './Button';
-import fetchMock from 'fetch-mock'
+import fetchMock from 'fetch-mock';
 import { shallow } from 'enzyme';
+import Button from './Button';
 
-describe('Button test', () =>{
-  let mockFn = jest.fn()
+describe('Button test', () => {
+  const mockedFn = jest.fn();
+  const type = 'PEOPLE';
 
-it('renders a container element', () => {
-  const dom = shallow(<Button />);
+  it('renders a container element', () => {
+    const dom = shallow(<Button />);
 
-  expect(dom.find('.btn-dataview')).toHaveLength(1);
-});
+    expect(dom.find('.btn-dataview')).toHaveLength(1);
+  });
 
+  it('renders a button', () => {
+    const dom = shallow(
+      <Button type={ type } handleClick={ mockedFn }/>);
+    const button = dom.find('.btn-data');
 
-it('has a button', () =>{
-  const mockFn = jest.fn()
-  const dom = shallow(<Button buttonClick = {mockFn}/>)
-  const buttonFound = dom.find('.btn-dataview').first()
-  buttonFound.simulate('click')
-
-  expect(mockFn).toBeCalled()
-})
-
-
-it('should render three buttons', () =>{
-    let mockFn = jest.fn()
-    const dom = shallow(<Controls onClick = {() => mockFn}/>)
-
-    expect(wrapper.find('button').length).toEqual(3);
-
-  })
-
+    expect(button).toHaveLength(1);
+    button.simulate('click');
+    expect(mockedFn).toHaveBeenCalledTimes(1);
+    expect(mockedFn).toHaveBeenCalledWith(type);
+  });
 });

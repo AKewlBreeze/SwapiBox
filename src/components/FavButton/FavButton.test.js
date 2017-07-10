@@ -13,8 +13,7 @@ describe('FavButton test', () => {
     expect(dom.find('.btn-favorite')).toHaveLength(1);
   });
 
-
-  it('has a button', () => {
+  it('renders a button', () => {
     const dom = shallow(
       <FavButton favoritesCount={[]}
         type={ type }

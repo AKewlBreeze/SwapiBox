@@ -25,8 +25,7 @@ it('renders a Favorite button if the card is not favorited', () => {
       handleFavorite={ mockedFn }/>,
   );
 
-  expect(dom.find('.btn-add-favorite')).toHaveLength(1);
-  expect(dom.find('.btn-add-favorite').text()).toEqual(' unfavorite ');
+  expect(dom.find('.btn-favorite')).toHaveLength(1);
 });
 
 it('renders a Unfavorite button if the card is favorited', () => {
@@ -37,8 +36,7 @@ it('renders a Unfavorite button if the card is favorited', () => {
       handleFavorite={ mockedFn }/>,
   );
 
-  expect(dom.find('.btn-add-favorite')).toHaveLength(1);
-  expect(dom.find('.btn-add-favorite').text()).toEqual(' favorite ');
+  expect(dom.find('.btn-favorite')).toHaveLength(1);
 });
 
 it('has a favorite/unfavorite button that can be clicked', () => {
@@ -49,8 +47,8 @@ it('has a favorite/unfavorite button that can be clicked', () => {
       handleFavorite={ mockedFn }/>,
   );
 
-  const button = dom.find('.btn-add-favorite');
-  expect(dom.find('.btn-add-favorite')).toHaveLength(1);
+  const button = dom.find('.btn-favorite');
+  expect(dom.find('.btn-favorite')).toHaveLength(1);
   button.simulate('click');
   expect(mockedFn).toHaveBeenCalledTimes(1);
   expect(mockedFn).toHaveBeenCalledWith(cardData);

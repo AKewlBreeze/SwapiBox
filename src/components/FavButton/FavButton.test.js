@@ -10,7 +10,7 @@ describe('FavButton test', () => {
   it('renders a container element', () => {
     const dom = shallow(<FavButton />);
 
-    expect(dom.find('.btn-favorite')).toHaveLength(1);
+    expect(dom.find('.btn-favorite-view')).toHaveLength(1);
   });
 
   it('renders a button', () => {
@@ -19,7 +19,7 @@ describe('FavButton test', () => {
         type={ type }
         handleClick={ mockedFn }/>,
       );
-    const button = dom.find('.btn-favorite');
+    const button = dom.find('.btn-favorite-view');
     expect(button).toHaveLength(1);
     button.simulate('click');
 
@@ -33,7 +33,7 @@ describe('FavButton test', () => {
         type={ type }
         handleClick={ mockedFn }/>,
       );
-    const button = dom.find('.btn-favorite');
+    const button = dom.find('.btn-favorite-view');
     expect(button.text()).toEqual('Favorites: 2');
   });
 });
